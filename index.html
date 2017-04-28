@@ -1,1 +1,220 @@
-<p>test</p>
+<style type="text/css">
+<!--
+.tab { margin-left: 40px; }
+-->
+</style>
+
+<style type="text/css">
+<!--
+.tab1 { margin-left: 80px; }
+-->
+</style>
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+<h1>Chapter 5:
+<br>
+Stopping and Continuing</h1>
+
+
+GDB allows you to control program flow by stopping and continuing program execution during a debugging session. This lets you investigate
+errors by modifying the program or by performing other debugging commands.
+
+This chapter describes how to do the following when your program stops at a breakpoint:
+
+<!--*****************************************-->
+<!--bulleted list -->
+
+<ul>
+ <li>examine and change variables</li>
+ <li>set new break points</li>
+ <li>use exception handling capabilities</li>
+ <li>delete or disable breakpoints and watchpoints</li>
+ <li>specify break conditions</li>
+ <li>specify breakpoint commond lists</li>
+ <li>specify breakpoint menus</li>
+ <li>resolve breakpoints in subprocesses</li>
+ <li>continue or step through a process</li>
+</ul>
+GDB provides messages that explain the status of your program during debugging; however, you can explicitly request status information at any time by invoking the 
+<code>info program</code> command.
+
+<!--**************************************-->
+<!--This is the first section -->
+
+<h2>Breakpoints, Watchpoints, and Exceptions</h2>
+A <i>breakpoint</i> stops your program at a specified point. For each breakpoint, you can add various conditions to futher control whether the program will stop. 
+You set the breakpoints with the <code>break</code> command (see "Setting Breakpoints" later in this chapter) to specify the place where the program should stop by 
+the line number, function name, or exact address in the program. In languages that support exception handling, you can also set the breakpoints where an exception is raised
+(see "Breakpoints and Exceptions" later in this chapter).
+<br>
+<br>
+A <i>watchpoint</i> is a special breakpoint that stops your program when the value of an expression changes. You use <code>watch</code> command to set watchpoints
+(see "Setting Watchpoings" later in this chapter). You manage a watchpoint like any other breakpoint: you enable, disable, and delete both breakpoints and watchpoints
+using the same commands.
+<br>
+<br>
+Each breakpoint or watchpoint is assigned a number when it is created; these numbers are successive integers starting with 1. For many of the commands that control
+various features of breakpoints, you use the breakpoint number to indicate which breakpoints you want to change. Each breakpoint can be enabled or disabled; a disabled breakpoint
+has no effect on the program until you enable it again.
+<br>
+<br>
+<h3>Setting Breakpoints</h3>
+You set breakpoints with the <code>break</code> command.
+<br>
+<br>
+
+<!--***************************************************-->
+<!--break command-->
+
+<code>break
+<br>
+b
+</code>
+
+<!--***************************************************-->
+<!--indented section-->
+
+<p class="tab">When specified without any arguments, <code>break</code> sets a breakpoint at the next instruction to be executed in the selected stack frame. In any selected
+frame but the innermost, this will cause the program to stop as soon as control returns to that frame. This is similar to the effect of a <code>finish</code> command in the frame 
+except that <code>finish</code> does not leave an active breakpoint (see "Continuing and Stepping" later in this chapter). if you use the <code>break</code> command without an argument
+in the innermost frame, GDB will stop the next time it reaches the current location; this may be useful in loops. You can abbreviate <code>break</code> to <code>b</code>.
+<br>
+<br>
+See Chapter 7 for more information on selecting stack frames.
+</p>
+<br>
+
+<!--************************************************-->
+<!--break linenum-->
+
+<code>break <i>linenum</i></code>
+<br>
+<code>b <i>linenum</i></code>
+<br>
+<p class="tab">Set a breakpoint at line <code><i>linenum</code></i> in the current source file. That file is the last file whose source text was printed. This breakpoint stops the 
+program just before the specified line is executed. You can abbreviate <code>break</code> to <code>b</code>. The following example illustrates the break command.
+<br>
+
+<!--*********************************************-->
+<!--double indented section -->
+
+<p class="tab1"><code>(gdb) <b>break 6</b>
+<br>
+Breakpoint 1 at 0x1158: file maximum.c, line 6.
+<br>
+(gdb)<b>run</b>
+<br>
+Starting program: /home/programs/maximum
+<br>
+<br>
+Breakpoint 1, at main () at maximum.c:6
+<br>
+6       printf("Enter the first number\"):
+<br>
+(gdb)
+</p>
+<br>
+
+<!--***********************************************-->
+<!--break filename:linenum-->
+
+break <em>filename:linenum</em>
+<br>
+b <em>filename:linenum</em></code>
+<br>
+<p class="tab">Set a breakpoint at line <code><em>linenum</code></em> in source <code><em>filename</code></em>.
+You can abbreviate <code>break</code> to <code>b</code>.
+</p>
+<br>
+
+<!--**********************************************-->
+<!--break offset-->
+
+<code>break <em>+offset</em>
+<br>
+b <em>+offset</em>
+break <em>-offset</em>
+b <em>-offset</em></code>
+
+<p class="tab">Set a breakpoint some number of lines forward (+) or backward (-) from the position at which execution stopped in the currently selected frame. You can 
+abbreviate <code>break</code> to <code>b</code>.
+<br>
+<br>
+The following example set a breakpoint six lines ahead of the current position:
+<br>
+<br>
+<p class="tab1">
+<code>(gdb) <em>break +6</em>
+<br>
+Breakpoint 2 at 0x11c4: file maximum.c, line 12.
+<br>
+(gdb)
+</code>
+</p>
+
+<p class="tab">
+Note that you must specify a plus sign (+) or minus sign (-) to set an offset, otherwise the breakpoint is set to <b>line number</b>.
+</p>
+
+<!--*********************************************************-->
+<!--break function-->
+
+<br>
+<code>break <em>function</em>
+<br>
+b <em>function</em></code>
+<p class="tab">Set a breakpoint at entry to function <code><em>function</em></code>. When using source languages that permit overloading of symbols such as C++, 
+<code><em>function</em></code> may refer to more than one possible place to break. See "Breakpoint Menus" later in this chapter for a discussion of that situation. 
+You can abbreviate <code>break</code> to <code>b</code>.
+<br>
+<br>
+The following example illustrates setting the breakpoint at the function <code>max</code>.
+<p class="tab1">
+<code>(gdb) <b>break max </b>
+<br>
+Breakpoint 1 at 0x11ec: file maximum.c, line 17.
+<br>
+(gdb) <b>run</b>
+<br>
+Starting  program: /home/programs/maximum
+<br>
+Enter the first number
+<br>
+<b>3</b>
+<br>
+Enter the second number
+<br>
+<b>5</b>
+<br>
+<br>
+Breakpoint 1, max (i=3, j=5) at maximum.c:17
+<br>
+17 of (i>j)
+<br>
+(gdb)
+</code>
+</p>
+
+<!--*********************************************************-->
+<!--break filename function-->
+<br>
+<code>break <em>filename:function</em>
+<br>
+b <em>filename:function</em>
+</code>
+<p class="tab">Set a breakpoint at entry to function <code><em>function</em></code> found in the <code><em>filename</em></code>. Specifying a file name as well as a function name is unnecessary except
+when multiple files contain functions with the same name. You can abbreviate <code>break</code> to <code>b</code>.
+
+
+
+
+
+
+
+
