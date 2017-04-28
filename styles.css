@@ -2,7 +2,10 @@
 .tab1 {margin-left: 80px;}
 
 .boxed {
-       border: 1px solid green;
+       border: 5px solid green;
+       width: 300px;
+       padding: 25px;
+       margin: 25px:       
        }
 
 body{
@@ -14,7 +17,7 @@ h1{
   }
   
 p {
-  color:red;
+  color:darkblue;
   }
   
  
