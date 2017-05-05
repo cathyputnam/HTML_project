@@ -91,9 +91,11 @@ See Chapter 7 for more information on selecting stack frames.
 <br>
 <code>b <i>linenum</i></code>
 <br>
-<p class="tab">Set a breakpoint at line <code><i>linenum</code></i> in the current source file. That file is the last file whose source text was printed. This breakpoint stops the 
+ <p class="tab">Set a breakpoint at line <code>linenum</code> in the current source file. That file is the last file whose source text was printed. This breakpoint stops the 
 program just before the specified line is executed. You can abbreviate <code>break</code> to <code>b</code>. The following example illustrates the break command.
 <br>
+ </p>
+ 
 
 <!--*********************************************-->
 <!--double indented section -->
@@ -112,6 +114,7 @@ Breakpoint 1, at main () at maximum.c:6
 6       printf("Enter the first number\"):
 <br>
 (gdb)
+ </code>
 </p>
 <br>
 
@@ -120,9 +123,9 @@ Breakpoint 1, at main () at maximum.c:6
 
 break <em>filename:linenum</em>
 <br>
-b <em>filename:linenum</em></code>
+b <code><em>filename:linenum</em></code>
 <br>
-<p class="tab">Set a breakpoint at line <code><em>linenum</code></em> in source <code><em>filename</code></em>.
+ <p class="tab">Set a breakpoint at line <code><em>linenum</em></code> in source <code><em>filename</em></code>.
 You can abbreviate <code>break</code> to <code>b</code>.
 </p>
 <br>
