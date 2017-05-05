@@ -140,9 +140,11 @@ b <em>-offset</em></code>
 abbreviate <code>break</code> to <code>b</code>.
 <br>
 <br>
+ 
 The following example set a breakpoint six lines ahead of the current position:
 <br>
 <br>
+ <div class = "boxed">
 <p class="tab1">
 <code>(gdb) <em>break +6</em>
 <br>
@@ -151,7 +153,7 @@ Breakpoint 2 at 0x11c4: file maximum.c, line 12.
 (gdb)
 </code>
 </p>
-
+ </div>
 <p class="tab">
 Note that you must specify a plus sign (+) or minus sign (-) to set an offset, otherwise the breakpoint is set to <b>line number</b>.
 </p>
@@ -168,6 +170,9 @@ b <em>function</em></code>
 You can abbreviate <code>break</code> to <code>b</code>.
 <br>
 <br>
+ 
+ <!--*********************************************************-->
+<!--breakpoint function-->
 The following example illustrates setting the breakpoint at the function <code>max</code>.
   <div class = "boxed">
 <p class="tab1">
