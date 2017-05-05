@@ -5,7 +5,14 @@
        border: 5px solid green;
        width: 500px;
        padding: 10px;
-       margin: 30px:       
+       margin: 30px;       
+       }
+
+.boxed1 {
+       border: 5px solid red;
+       width: 500px;
+       padding: 10 px;
+       margin: 30 px;
        }
 
 body{
