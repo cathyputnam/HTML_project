@@ -70,6 +70,10 @@ various features of breakpoints, you use the breakpoint number to indicate which
 has no effect on the program until you enable it again.
 <br>
 <br>
+ 
+ <!--*************************************************-->
+ <!--Subheading-->
+ 
 <h3>Setting Breakpoints</h3>
 You set breakpoints with the <code>break</code> command.
 <br>
@@ -110,7 +114,7 @@ program just before the specified line is executed. You can abbreviate <code>bre
  
 
 <!--*********************************************-->
-<!--double indented section -->
+<!--double indented section and boxed section - coding example -->
 
  <div class = "boxed">
     <p class="tab1"><code>(gdb) <b>break 6</b>
@@ -135,7 +139,7 @@ program just before the specified line is executed. You can abbreviate <code>bre
 <!--***********************************************-->
 <!--break filename:linenum-->
 
-break <em>filename:linenum</em>
+ break <code><em>filename:linenum</em></code>
 <br>
 b <code><em>filename:linenum</em></code>
 <br>
@@ -158,12 +162,15 @@ abbreviate <code>break</code> to <code>b</code>.
 <br>
 <br>
  
-<!--**********************************************-->
-<!--boxed example-->
+
  
 The following example set a breakpoint six lines ahead of the current position:
 <br>
 <br>
+ 
+<!--**********************************************-->
+<!--boxed example, double indented, code-->
+ 
  <div class = "boxed">
 <p class="tab1">
 <code>(gdb) <em>break +6</em>
@@ -195,7 +202,11 @@ You can abbreviate <code>break</code> to <code>b</code>.
  <!--*********************************************************-->
 <!--breakpoint function-->
 The following example illustrates setting the breakpoint at the function <code>max</code>.
-  <div class = "boxed">
+ 
+<!--**********************************************-->
+<!--boxed example, double indented, code--> 
+ 
+<div class = "boxed">
 <p class="tab1">
 <code>(gdb) <b>break max </b>
 <br>
@@ -235,9 +246,11 @@ b <em>filename:function</em>
 when multiple files contain functions with the same name. You can abbreviate <code>break</code> to <code>b</code>.
  </p>
  <br>
- For more information on GDB, click <a href="https://en.wikipedia.org/wiki/GNU_Debugger">here.</a> 
-
  
+<!--**********************************************-->
+<!--link to GDB Wiki page-->
+ 
+ For more information on GDB, click <a href="https://en.wikipedia.org/wiki/GNU_Debugger">here.</a> 
                   
  
  </body>
